@@ -140,6 +140,53 @@
       color: #ff4500;
       text-decoration: none;
     }
+
+    /* ===== RESPONSIVIDADE PARA CELULAR ===== */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .header-left {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search-bar {
+        width: 100%;
+        margin-top: 10px;
+        padding: 0 1rem;
+      }
+
+      .search-bar input {
+        width: 100%;
+      }
+
+      .produtos-carrossel {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .produto {
+        width: 90%;
+        max-width: 300px;
+      }
+
+      .fale-conosco {
+        padding: 1rem;
+        margin: 1rem;
+      }
+
+      .fale-conosco h3 {
+        font-size: 2rem;
+      }
+
+      .fale-conosco p, .fale-conosco a {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
