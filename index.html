@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IMPORTS_RAMIRO - Perfumes e Roupas</title>
   <style>
-    /* Estilos gerais */
     html, body {
       margin: 0;
       padding: 0;
@@ -50,6 +49,28 @@
       width: 100%;
       box-sizing: border-box;
     }
+    h2 {
+      font-size: 1.5rem;
+      color: #ff4500;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .carrossel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .produtos-carrossel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      padding-bottom: 1rem; /* Adicionado padding bottom */
+    }
+    .produtos-carrossel::-webkit-scrollbar {
+      display: none;
+    }
     .produto {
       background: #fff;
       border: 1px solid #ddd;
@@ -59,7 +80,138 @@
       flex-shrink: 0;
       position: relative;
       text-align: center;
-      display: block;
+      display: block; /* Garante que todos os produtos comecem visíveis */
+    }
+    .produto img {
+      width: 100%;
+      border-radius: 5px;
+    }
+    .produto h3 {
+      font-size: 0.9rem;
+      margin: 0.3rem 0;
+    }
+    .produto p {
+      font-size: 0.9rem;
+      color: #ff4500;
+      font-weight: bold;
+    }
+    .produto a {
+      display: inline-block;
+      background-color: green;
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 0.3rem;
+      font-size: 0.8rem;
+    }
+    .esgotado::after {
+      content: "Esgotado";
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: red;
+      color: white;
+      padding: 3px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+    }
+    .seta {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      font-size: 1.5rem;
+      padding: 0.3rem;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .seta.esquerda {
+      left: 0;
+    }
+    .seta.direita {
+      right: 0;
+    }
+    .fale-conosco {
+      background-color: #f4f4f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1.5rem auto;
+      max-width: 95%;
+      text-align: center;
+    }
+    .fale-conosco h3 {
+      font-size: 1.7rem;
+      margin-bottom: 0.8rem;
+    }
+    .fale-conosco a {
+      background-color: #ff4500;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-top: 0.8rem;
+      display: inline-block;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 0.7rem;
+      font-size: 0.8rem;
+    }
+    footer a {
+      color: #ff4500;
+      text-decoration: none;
+    }
+
+    /* Estilos para celular */
+    @media (max-width: 600px) {
+      .header-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .header-left {
+        margin-bottom: 1rem;
+      }
+      .search-bar {
+        margin-top: 0.5rem;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      .produtos-carrossel {
+        gap: 0.3rem;
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+      }
+      .produto {
+        width: 140px;
+        padding: 0.3rem;
+      }
+      .produto h3 {
+        font-size: 0.8rem;
+      }
+      .produto p {
+        font-size: 0.8rem;
+      }
+      .produto a {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+      }
+      .esgotado::after {
+        font-size: 0.6rem;
+        padding: 2px;
+      }
+      .seta {
+        font-size: 1.2rem;
+        padding: 0.2rem;
+      }
     }
   </style>
 </head>
@@ -75,56 +227,144 @@
         </div>
       </div>
       <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Pesquisar produtos..."/>
+        <input type="text" id="searchInput" placeholder="Pesquisar produtos..." oninput="filtrarProdutos()" />
       </div>
     </div>
   </header>
+<div style="text-align: center; margin: 20px 0;">
+  <a href="camisas-cremes.html" class="botao-pagina">🆕 Ver Camisas e Cremes</a>
+</div>
 
-  <section id="produtos">
-    <h2>Perfumes Disponíveis</h2>
-    <div class="produtos-container">
-      <div class="produto disponivel" data-nome="1 Million">
-        <img src="imagens html/1million.jpeg" alt="1 Million">
-        <h3>1 Million Tradicional</h3>
-        <p>R$300,00</p>
-        <a href="#">Comprar</a>
+  <section>
+    <h2>Perfumes Masculinos</h2>
+    <div class="carrossel-container">
+      <button class="seta esquerda" onclick="rolar(this, -1)">‹</button>
+      <div class="produtos-carrossel">
+        <div class="produto disponivel" data-nome="1 Million">
+          <img src="imagens html/1million.jpeg" alt="1 Million">
+          <h3>1 Million Tradicional</h3>
+          <p>R$300,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%201%20Million">Comprar</a>
+        </div>
+        <div class="produto disponivel" data-nome="Invictus">
+          <img src="imagens html/invictus.jpeg" alt="Invictus">
+          <h3>Invictus</h3>
+          <p>R$300,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20Invictus">Comprar</a>
+        </div>
+        <div class="produto disponivel" data-nome="Phantom">
+          <img src="imagens html/phantom.jpeg" alt="Phantom">
+          <h3>Phantom</h3>
+          <p>R$300,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20Phantom">Comprar</a>
+        </div>
+        <div class="produto disponivel" data-nome="212 VIP MEN">
+          <img src="imagens html/212 vip masculino.jpeg" alt="212 VIP MEN">
+          <h3>212 VIP MEN CLUB</h3>
+          <p>R$330,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20212%20VIP%20MEN">Comprar</a>
+        </div>
+        <div class="produto disponivel" data-nome="Bad Boy">
+          <img src="imagens html/badboy.jpeg" alt="Bad Boy">
+          <h3>BADBOY</h3>
+          <p>R$320,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20Badboy">Comprar</a>
+        </div>
       </div>
-      <div class="produto disponivel" data-nome="Invictus">
-        <img src="imagens html/invictus.jpeg" alt="Invictus">
-        <h3>Invictus</h3>
-        <p>R$300,00</p>
-        <a href="#">Comprar</a>
-      </div>
-      <div class="produto disponivel" data-nome="Phantom">
-        <img src="imagens html/phantom.jpeg" alt="Phantom">
-        <h3>Phantom</h3>
-        <p>R$300,00</p>
-        <a href="#">Comprar</a>
-      </div>
+      <button class="seta direita" onclick="rolar(this, 1)">›</button>
     </div>
   </section>
 
+  <section>
+    <h2>Perfumes Femininos</h2>
+    <div class="carrossel-container">
+      <button class="seta esquerda" onclick="rolar(this, -1)">‹</button>
+      <div class="produtos-carrossel">
+        <div class="produto disponivel" data-nome="Lady Million">
+          <img src="imagens html/one femino.jpeg" alt="Lady Million" />
+          <h3>One Million Feminino</h3>
+          <p>R$320,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20One%20Million%20Feminino">Comprar</a>
+        </div>
+        <div class="produto esgotado" data-nome="Good Girl">
+          <img src="imagens html/sapato.jpeg" alt="Good Girl" />
+          <h3>Good Girl</h3>
+          <p>R$350,00</p>
+        </div>
+        <div class="produto disponivel" data-nome="La Vie Est Belle">
+          <img src="imagens html/la vida es bela.jpeg" alt="La Vie Est Belle" />
+          <h3>La Vie Est Belle</h3>
+          <p>R$340,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20La%20Vie%20Est%20Belle">Comprar</a>
+        </div>
+        <div class="produto esgotado" data-nome="Scandal">
+          <img src="imagens html/Fame Fortuon.jpeg" alt="Scandal" />
+          <h3>Fame e Fortune</h3>
+          <p>R$330,00</p>
+        </div>
+        <div class="produto disponivel" data-nome="Olympéa">
+          <img src="imagens html/Perfume Olympéa.jpeg" alt="Olympéa" />
+          <h3>Olympéa</h3>
+          <p>R$360,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20Olympéa">Comprar</a>
+        </div>
+      </div>
+      <button class="seta direita" onclick="rolar(this, 1)">›</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Perfumes Árabes</h2>
+    <div class="carrossel-container">
+      <button class="seta esquerda" onclick="rolar(this, -1)">‹</button>
+      <div class="produtos-carrossel">
+        <div class="produto esgotado" data-nome="AL WADLE">
+          <img src="imagens html/AL WADLE.jpeg" alt="AL WADLE" />
+          <h3>AL WADLE ORIGINAL</h3>
+          <p>R$420,00</p>
+        </div>
+        <div class="produto disponivel" data-nome="AL NOBLE">
+          <img src="imagens html/AL NOBLE.jpeg" alt="AL NOBLE" />
+          <h3>AL NOBLE ORIGINAL</h3>
+          <p>R$410,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20Amber%20Oud">Comprar</a>
+        </div>
+        <div class="produto disponivel" data-nome="LATTAFA">
+          <img src="imagens html/LATTAFA.jpeg" alt="lattafa" />
+          <h3>Lattafa Original</h3>
+          <p>R$450,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20Lattafa">Comprar</a>
+        </div>
+        <div class="produto disponivel" data-nome="Yara Original">
+          <img src="imagens html/YARA.jpeg" alt="Yara Original" />
+          <h3>Yara Original</h3>
+          <p>R$450,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20Yara%20Original">Comprar</a>
+        </div>
+        <div class="produto disponivel" data-nome="ASAD">
+          <img src="imagens html/ASAD.jpeg" alt="ASAD" />
+          <h3>ASAD ORIGINAL</h3>
+          <p>R$400,00</p>
+          <a href="https://wa.me/5551985420761?text=Tenho%20interesse%20no%20ASAD">Comprar</a>
+        </div>
+      </div>
+      <button class="seta direita" onclick="rolar(this, 1)">›</button>
+    </div>
+  </section>
+
+  <section class="fale-conosco">
+    <h3>Fale Conosco</h3>
+    <p>Procurando um perfume específico? Entre em contato conosco pelo WhatsApp!</p>
+    <a href="https://wa.me/5551985420761">Falar no WhatsApp</a>
+  </section>
+
+  <footer>
+    <p>© 2025 IMPORTS_RAMIRO | WhatsApp: (51) 98542-0761</p>
+    <p>Siga no Instagram: <a href="https://instagram.com/seuusuario" target="_blank">@imports_ramiro</a></p>
+  </footer>
+
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        function filtrarProdutos() {
-            const termo = document.getElementById("searchInput").value.toLowerCase().trim();
-            console.log("Termo de pesquisa:", termo);
-
-            const produtos = document.querySelectorAll(".produto");
-            produtos.forEach(produto => {
-                const nome = produto.getAttribute("data-nome");
-                if (nome) {
-                    const nomeFormatado = nome.toLowerCase().trim();
-                    console.log("Nome do produto:", nomeFormatado);
-
-                    produto.style.display = nomeFormatado.includes(termo) ? "block" : "none";
-                }
-            });
-        }
-
-        document.getElementById("searchInput").addEventListener("input", filtrarProdutos);
-    });
-  </script>
-
-</body>
-</html>
+    function rolar(botao, direcao) {
+      const container = botao.parentElement.querySelector('.produtos-carrossel');
+      const largura = container.offsetWidth;
+      container.scrollBy({ left: largura * direcao * 0.8,
