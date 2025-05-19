@@ -367,13 +367,4 @@
     function rolar(botao, direcao) {
       const container = botao.parentElement.querySelector('.produtos-carrossel');
       const largura = container.offsetWidth;
-      container.scrollBy({ left: largura * direcao * 0.8, behavior: 'smooth' });
-    }
-
-    function filtrarProdutos() {
-      const termo = document.getElementById("searchInput").value.toLowerCase();
-      const produtos = document.querySelectorAll(".produto");
-      const sections = document.querySelectorAll("section");
-
-      produtos.forEach(produto => {
-        const nome = produto.getAttribute("data-nome").toLowerCase();
+      container.scrollBy({ left: largura * direcao
