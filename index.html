@@ -236,11 +236,11 @@
   <a href="camisas-cremes.html" class="botao-pagina">🆕 Ver Camisas e Cremes</a>
 </div>
 
-  <section>
+  <section id="perfumes-masculinos">
     <h2>Perfumes Masculinos</h2>
     <div class="carrossel-container">
       <button class="seta esquerda" onclick="rolar(this, -1)">‹</button>
-      <div class="produtos-carrossel">
+      <div class="produtos-carrossel masculino">
         <div class="produto disponivel" data-nome="1 Million">
           <img src="imagens html/1million.jpeg" alt="1 Million">
           <h3>1 Million Tradicional</h3>
@@ -276,11 +276,11 @@
     </div>
   </section>
 
-  <section>
+  <section id="perfumes-femininos">
     <h2>Perfumes Femininos</h2>
     <div class="carrossel-container">
       <button class="seta esquerda" onclick="rolar(this, -1)">‹</button>
-      <div class="produtos-carrossel">
+      <div class="produtos-carrossel feminino">
         <div class="produto disponivel" data-nome="Lady Million">
           <img src="imagens html/one femino.jpeg" alt="Lady Million" />
           <h3>One Million Feminino</h3>
@@ -314,11 +314,11 @@
     </div>
   </section>
 
-  <section>
+  <section id="perfumes-arabes">
     <h2>Perfumes Árabes</h2>
     <div class="carrossel-container">
       <button class="seta esquerda" onclick="rolar(this, -1)">‹</button>
-      <div class="produtos-carrossel">
+      <div class="produtos-carrossel arabes">
         <div class="produto esgotado" data-nome="AL WADLE">
           <img src="imagens html/AL WADLE.jpeg" alt="AL WADLE" />
           <h3>AL WADLE ORIGINAL</h3>
@@ -365,7 +365,4 @@
   </footer>
 
   <script>
-    function rolar(botao, direcao) {
-      const container = botao.parentElement.querySelector('.produtos-carrossel');
-      const largura = container.offsetWidth;
-      container.scrollBy({ left: largura
+    function rolar(botao, dire
