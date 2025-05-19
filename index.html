@@ -80,6 +80,7 @@
       flex-shrink: 0;
       position: relative;
       text-align: center;
+      display: block; /* Garante que todos os produtos comecem visíveis */
     }
     .produto img {
       width: 100%;
@@ -168,7 +169,7 @@
       text-decoration: none;
     }
 
-    /* Media query para telas com largura máxima de 600px (celulares) */
+    /* Estilos para celular */
     @media (max-width: 600px) {
       .header-content {
         flex-direction: column;
@@ -185,12 +186,12 @@
         font-size: 1.3rem;
       }
       .produtos-carrossel {
-        gap: 0.3rem; /* Reduzindo ainda mais o gap em telas pequenas */
+        gap: 0.3rem;
         padding-left: 0.3rem;
         padding-right: 0.3rem;
       }
       .produto {
-        width: 140px; /* Reduzindo a largura dos produtos no carrossel em celulares */
+        width: 140px;
         padding: 0.3rem;
       }
       .produto h3 {
@@ -372,5 +373,7 @@
     function filtrarProdutos() {
       const termo = document.getElementById("searchInput").value.toLowerCase();
       const produtos = document.querySelectorAll(".produto");
+      const sections = document.querySelectorAll("section");
+
       produtos.forEach(produto => {
-        const nome = produto.
+        const nome = produto.getAttribute("data-nome").toLowerCase();
