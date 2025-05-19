@@ -66,6 +66,7 @@
       scroll-behavior: smooth;
       gap: 0.5rem;
       padding: 0.5rem;
+      padding-bottom: 1rem; /* Adicionado padding bottom */
     }
     .produtos-carrossel::-webkit-scrollbar {
       display: none;
@@ -182,6 +183,33 @@
       }
       h1 {
         font-size: 1.3rem;
+      }
+      .produtos-carrossel {
+        gap: 0.3rem; /* Reduzindo ainda mais o gap em telas pequenas */
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+      }
+      .produto {
+        width: 140px; /* Reduzindo a largura dos produtos no carrossel em celulares */
+        padding: 0.3rem;
+      }
+      .produto h3 {
+        font-size: 0.8rem;
+      }
+      .produto p {
+        font-size: 0.8rem;
+      }
+      .produto a {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+      }
+      .esgotado::after {
+        font-size: 0.6rem;
+        padding: 2px;
+      }
+      .seta {
+        font-size: 1.2rem;
+        padding: 0.2rem;
       }
     }
   </style>
@@ -345,10 +373,4 @@
       const termo = document.getElementById("searchInput").value.toLowerCase();
       const produtos = document.querySelectorAll(".produto");
       produtos.forEach(produto => {
-        const nome = produto.getAttribute("data-nome").toLowerCase();
-        produto.style.display = nome.includes(termo) ? "block" : "none";
-      });
-    }
-  </script>
-</body>
-</html>
+        const nome = produto.
