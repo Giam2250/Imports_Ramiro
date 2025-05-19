@@ -367,4 +367,4 @@
     function rolar(botao, direcao) {
       const container = botao.parentElement.querySelector('.produtos-carrossel');
       const largura = container.offsetWidth;
-      container.scrollBy({ left: largura * direcao
+      container.scrollBy({ left: largura * direcao * 0.8, behavior: 'smooth' });
